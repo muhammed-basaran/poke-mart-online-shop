@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
+import "../Card/card.css";
+import ShoppingItem from "../ShoppingItem/ShoppingItem";
 
 export default function Card() {
-  const [item, setItem] = useState([]);
+  const [items, setItem] = useState([]);
 
   useEffect(() => {
-    async function shoppingItem() {
+    async function getPokeData() {
+      const urlItem = "https://pokeapi.co/api/v2/item/";
+
       try {
-        const response = await fetch("https://pokeapi.co/api/v2/item/");
+        const response = await fetch(urlItem);
         const data = await response.json();
         setItem(data.results);
       } catch (error) {
         console.log("STOP");
       }
     }
-    shoppingItem();
+    getPokeData();
   }, []);
 
   return (
     <section>
-      <ul>
-        {item.map(({ name }) => (
-          <li className="card" key={name}>
-            {name}
-          </li>
+      <ul className="card-container">
+        {items.map((item) => (
+          <ShoppingItem key={item.name} name={item.name} url={item.url} />
         ))}
       </ul>
     </section>
