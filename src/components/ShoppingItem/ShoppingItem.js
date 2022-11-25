@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import "../ShoppingItem/shoppingItem.css";
+
+import styled from "styled-components";
 
 export default function ShoppingItem({ name, url }) {
   const [detailItem, setDetailItem] = useState({});
@@ -18,10 +19,23 @@ export default function ShoppingItem({ name, url }) {
   }, [url]);
 
   return (
-    <li className="card">
-      <img className="item-img" src={detailItem.sprites?.default} alt="" />
+    <StyledCard>
+      <StyledImg src={detailItem.sprites?.default} alt="" />
       <p>{name}</p>
       <p>{detailItem.cost + "$"}</p>
-    </li>
+    </StyledCard>
   );
 }
+
+const StyledImg = styled.img`
+  width: 60px;
+`;
+
+const StyledCard = styled.li`
+  padding: 20px;
+  border: 2px solid black;
+  width: 10rem;
+  height: 13rem;
+  list-style: none;
+  border-radius: 20%;
+`;

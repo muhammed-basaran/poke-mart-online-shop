@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import "../Card/card.css";
+
 import ShoppingItem from "../ShoppingItem/ShoppingItem";
+import styled from "styled-components";
 
 export default function Card() {
   const [items, setItem] = useState([]);
@@ -22,11 +23,19 @@ export default function Card() {
 
   return (
     <section>
-      <ul className="card-container">
+      <StyledCardContainer>
         {items.map((item) => (
           <ShoppingItem key={item.name} name={item.name} url={item.url} />
         ))}
-      </ul>
+      </StyledCardContainer>
     </section>
   );
 }
+
+const StyledCardContainer = styled.ul`
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  justify-items: center;
+`;
